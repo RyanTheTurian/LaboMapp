@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Double Swipe</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#111;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            height:100vh;
+        }
+
+        /* CONTENITORE PRINCIPALE */
+
+        .container{
+            display:flex;
+            gap:20px;
+
+            width:95%;
+            height:80vh;
+        }
+
+        /* SWIPE */
+
+        .compare{
+            position:relative;
+
+            width:50%;
+            height:100%;
+
+            overflow:hidden;
+
+            border-radius:15px;
+        }
+
+        /* IMMAGINI */
+
+        .compare img{
+            width:100%;
+            height:100%;
+
+            object-fit:cover;
+
+            position:absolute;
+        }
+
+        /* IMMAGINE SOPRA */
+
+        .after{
+            width:50%;
+            overflow:hidden;
+        }
+
+        /* SLIDER */
+
+        .slider{
+            position:absolute;
+
+            top:0;
+            left:50%;
+
+            width:4px;
+            height:100%;
+
+            background:white;
+
+            z-index:10;
+
+            cursor:ew-resize;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- BLOCCO 1 -->
+
+    <div class="compare">
+
+        <img src="images/before1.jpg">
+
+        <div class="after">
+            <img src="images/after1.jpg">
+        </div>
+
+        <div class="slider"></div>
+
+    </div>
+
+    <!-- BLOCCO 2 -->
+
+    <div class="compare">
+
+        <img src="images/before2.jpg">
+
+        <div class="after">
+            <img src="images/after2.jpg">
+        </div>
+
+        <div class="slider"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.querySelectorAll('.compare').forEach(compare => {
+
+        const slider = compare.querySelector('.slider');
+        const after = compare.querySelector('.after');
+
+        let dragging = false;
+
+        slider.addEventListener('mousedown', () => {
+            dragging = true;
+        });
+
+        window.addEventListener('mouseup', () => {
+            dragging = false;
+        });
+
+        window.addEventListener('mousemove', e => {
+
+            if(!dragging) return;
+
+            const rect = compare.getBoundingClientRect();
+
+            let x = e.clientX - rect.left;
+
+            if(x < 0) x = 0;
+            if(x > rect.width) x = rect.width;
+
+            after.style.width = x + 'px';
+            slider.style.left = x + 'px';
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
