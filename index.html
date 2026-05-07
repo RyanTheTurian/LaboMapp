@@ -9,15 +9,24 @@
 
     <style>
 
+        /* RESET */
+
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
+
+            user-select:none;
+            -webkit-user-select:none;
         }
 
+        /* PAGINA */
+
         body{
+
             font-family:Arial,sans-serif;
-            background:#111;
+
+            background:#f8f8f8;
 
             display:flex;
             justify-content:center;
@@ -26,19 +35,22 @@
             height:100vh;
         }
 
-        /* CONTENITORE PRINCIPALE */
+        /* CONTENITORE */
 
         .container{
+
             display:flex;
-            gap:20px;
+
+            gap:10px;
 
             width:95%;
             height:80vh;
         }
 
-        /* SWIPE */
+        /* BLOCCO COMPARAZIONE */
 
         .compare{
+
             position:relative;
 
             width:50%;
@@ -47,29 +59,46 @@
             overflow:hidden;
 
             border-radius:15px;
+
+            background:white;
         }
 
         /* IMMAGINI */
 
         .compare img{
+
+            position:absolute;
+
+            top:0;
+            left:0;
+
             width:100%;
             height:100%;
 
             object-fit:cover;
 
-            position:absolute;
+            pointer-events:none;
         }
 
         /* IMMAGINE SOPRA */
 
         .after{
+
+            position:absolute;
+
+            top:0;
+            left:0;
+
             width:50%;
+            height:100%;
+
             overflow:hidden;
         }
 
         /* SLIDER */
 
         .slider{
+
             position:absolute;
 
             top:0;
@@ -85,6 +114,36 @@
             cursor:ew-resize;
         }
 
+        /* CERCHIO */
+
+        .slider::before{
+
+            content:"↔";
+
+            position:absolute;
+
+            top:50%;
+            left:50%;
+
+            transform:translate(-50%,-50%);
+
+            width:40px;
+            height:40px;
+
+            background:white;
+
+            border-radius:50%;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:20px;
+            font-weight:bold;
+
+            color:black;
+        }
+
     </style>
 </head>
 
@@ -92,21 +151,27 @@
 
 <div class="container">
 
-    <!-- BLOCCO 1 -->
+    <!-- COMPARAZIONE 1 -->
 
     <div class="compare">
 
+        <!-- FOTO SOTTO -->
+
         <img src="images/before1.jpg">
+
+        <!-- FOTO SOPRA -->
 
         <div class="after">
             <img src="images/after1.jpg">
         </div>
 
+        <!-- SLIDER -->
+
         <div class="slider"></div>
 
     </div>
 
-    <!-- BLOCCO 2 -->
+    <!-- COMPARAZIONE 2 -->
 
     <div class="compare">
 
@@ -124,6 +189,8 @@
 
 <script>
 
+    /* PER OGNI COMPARAZIONE */
+
     document.querySelectorAll('.compare').forEach(compare => {
 
         const slider = compare.querySelector('.slider');
@@ -131,13 +198,19 @@
 
         let dragging = false;
 
+        /* CLICK */
+
         slider.addEventListener('mousedown', () => {
             dragging = true;
         });
 
+        /* RILASCIO */
+
         window.addEventListener('mouseup', () => {
             dragging = false;
         });
+
+        /* MOVIMENTO */
 
         window.addEventListener('mousemove', e => {
 
@@ -147,10 +220,17 @@
 
             let x = e.clientX - rect.left;
 
+            /* LIMITI */
+
             if(x < 0) x = 0;
             if(x > rect.width) x = rect.width;
 
+            /* MUOVE IMMAGINE */
+
             after.style.width = x + 'px';
+
+            /* MUOVE SLIDER */
+
             slider.style.left = x + 'px';
         });
 
