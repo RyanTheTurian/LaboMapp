@@ -31,7 +31,7 @@
             font-family:Arial,sans-serif;
         }
 
-        /* CONTENITORE RIGHE */
+        /* CONTENITORE */
 
         .container{
 
@@ -50,7 +50,7 @@
             margin-bottom:15px;
         }
 
-        /* BLOCCO SWIPE */
+        /* SWIPE */
 
         .compare{
 
@@ -58,7 +58,7 @@
 
             width:48%;
 
-            aspect-ratio:16/9;
+            height:clamp(220px, 32vw, 420px);
 
             overflow:hidden;
 
@@ -169,7 +169,7 @@
 
                 width:100%;
 
-                aspect-ratio:16/9;
+                height:220px;
             }
 
             .slider::before{
@@ -186,18 +186,22 @@
 
 <body>
 
-<!-- RIGA 1 -->
-
 <div class="container">
 
     <!-- SWIPE 1 -->
 
     <div class="compare">
 
+        <!-- FOTO SOTTO -->
+
         <img src="images/before1.jpg">
+
+        <!-- FOTO SOPRA -->
 
         <img class="after"
              src="images/after1.jpg">
+
+        <!-- SLIDER -->
 
         <div class="slider"></div>
 
@@ -218,39 +222,9 @@
 
 </div>
 
-<!-- RIGA 2 -->
-
-<div class="container">
-
-    <!-- SWIPE 3 -->
-
-    <div class="compare">
-
-        <img src="images/before3.jpg">
-
-        <img class="after"
-             src="images/after3.jpg">
-
-        <div class="slider"></div>
-
-    </div>
-
-    <!-- SWIPE 4 -->
-
-    <div class="compare">
-
-        <img src="images/before4.jpg">
-
-        <img class="after"
-             src="images/after4.jpg">
-
-        <div class="slider"></div>
-
-    </div>
-
-</div>
-
 <script>
+
+    /* SWIPE */
 
     document.querySelectorAll('.compare').forEach(compare => {
 
@@ -259,8 +233,6 @@
         const after = compare.querySelector('.after');
 
         let dragging = false;
-
-        /* MOVIMENTO */
 
         function moveSlider(clientX){
 
@@ -274,12 +246,12 @@
 
             const percent = (x / rect.width) * 100;
 
-            /* TAGLIA FOTO */
+            /* TAGLIO FOTO */
 
             after.style.clipPath =
                 `inset(0 ${100 - percent}% 0 0)`;
 
-            /* MUOVE SLIDER */
+            /* POSIZIONE SLIDER */
 
             slider.style.left = percent + '%';
         }
@@ -322,6 +294,47 @@
             moveSlider(e.touches[0].clientX);
         });
 
+    });
+
+    /* AUTO RESIZE STORYMAPS */
+
+    function sendHeight(){
+
+        const height =
+            document.body.scrollHeight;
+
+        if(window.parent){
+
+            window.parent.postMessage({
+
+                frameHeight:height
+
+            }, "*");
+        }
+    }
+
+    /* LOAD */
+
+    window.addEventListener(
+        "load",
+        sendHeight
+    );
+
+    /* RESIZE */
+
+    window.addEventListener(
+        "resize",
+        sendHeight
+    );
+
+    /* LOAD IMMAGINI */
+
+    document.querySelectorAll("img").forEach(img=>{
+
+        img.addEventListener(
+            "load",
+            sendHeight
+        );
     });
 
 </script>
