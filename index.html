@@ -9,8 +9,6 @@
 
     <style>
 
-        /* RESET */
-
         *{
             margin:0;
             padding:0;
@@ -20,8 +18,6 @@
             -webkit-user-select:none;
         }
 
-        /* PAGINA */
-
         body{
             font-family:Arial,sans-serif;
 
@@ -29,8 +25,6 @@
 
             padding:20px;
         }
-
-        /* CONTENITORE */
 
         .container{
 
@@ -45,8 +39,6 @@
             flex-wrap:wrap;
         }
 
-        /* BLOCCO COMPARAZIONE */
-
         .compare{
 
             position:relative;
@@ -59,27 +51,12 @@
 
             border-radius:15px;
 
-            background:white;
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
         }
 
-        /* IMMAGINI BASE */
-
-        .compare img{
-
-            position:absolute;
-
-            top:0;
-            left:0;
-
-            width:100%;
-            height:100%;
-
-            object-fit:cover;
-
-            pointer-events:none;
-        }
-
-        /* CONTENITORE FOTO AFTER */
+        /* IMMAGINE SOPRA */
 
         .after{
 
@@ -94,21 +71,14 @@
             overflow:hidden;
         }
 
-        /* FOTO AFTER */
-
-        .after img{
-
-            position:absolute;
-
-            top:0;
-            left:0;
+        .after-image{
 
             width:100%;
             height:100%;
 
-            object-fit:cover;
-
-            min-width:100%;
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
         }
 
         /* SLIDER */
@@ -131,8 +101,6 @@
 
             touch-action:none;
         }
-
-        /* CERCHIO CENTRALE */
 
         .slider::before{
 
@@ -166,7 +134,7 @@
 
         /* MOBILE */
 
-        @media (max-width: 768px){
+        @media (max-width:768px){
 
             .container{
 
@@ -190,34 +158,34 @@
 
 <div class="container">
 
-    <!-- CONFRONTO 1 -->
+    <!-- BLOCCO 1 -->
 
-    <div class="compare">
-
-        <!-- FOTO BEFORE -->
-
-        <img src="images/before1.jpg">
-
-        <!-- FOTO AFTER -->
+    <div class="compare"
+         style="background-image:url('images/before1.jpg')">
 
         <div class="after">
-            <img src="images/after1.jpg">
-        </div>
 
-        <!-- SLIDER -->
+            <div class="after-image"
+                 style="background-image:url('images/after1.jpg')">
+            </div>
+
+        </div>
 
         <div class="slider"></div>
 
     </div>
 
-    <!-- CONFRONTO 2 -->
+    <!-- BLOCCO 2 -->
 
-    <div class="compare">
-
-        <img src="images/before2.jpg">
+    <div class="compare"
+         style="background-image:url('images/before2.jpg')">
 
         <div class="after">
-            <img src="images/after2.jpg">
+
+            <div class="after-image"
+                 style="background-image:url('images/after2.jpg')">
+            </div>
+
         </div>
 
         <div class="slider"></div>
@@ -228,8 +196,6 @@
 
 <script>
 
-    /* PER OGNI BLOCCO */
-
     document.querySelectorAll('.compare').forEach(compare => {
 
         const slider = compare.querySelector('.slider');
@@ -237,24 +203,16 @@
 
         let dragging = false;
 
-        /* FUNZIONE MOVIMENTO */
-
         function moveSlider(clientX){
 
             const rect = compare.getBoundingClientRect();
 
             let x = clientX - rect.left;
 
-            /* LIMITI */
-
             if(x < 0) x = 0;
             if(x > rect.width) x = rect.width;
 
-            /* REVEAL FOTO */
-
             after.style.width = x + 'px';
-
-            /* MUOVE SLIDER */
 
             slider.style.left = x + 'px';
         }
