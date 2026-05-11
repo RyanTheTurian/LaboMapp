@@ -23,7 +23,6 @@
         /* PAGINA */
 
         html,body{
-
             width:100%;
         }
 
@@ -64,6 +63,8 @@
             overflow:hidden;
 
             border-radius:15px;
+
+            background:#000;
         }
 
         /* IMMAGINI */
@@ -145,7 +146,7 @@
 
             color:black;
 
-            box-shadow:0 0 10px rgba(0,0,0,0.2);
+            box-shadow:0 0 10px rgba(0,0,0,0.25);
         }
 
         /* MOBILE */
@@ -178,22 +179,18 @@
 
 <body>
 
+<!-- RIGA -->
+
 <div class="container">
 
     <!-- SWIPE 1 -->
 
     <div class="compare">
 
-        <!-- FOTO SOTTO -->
-
         <img src="images/before1.jpg">
-
-        <!-- FOTO SOPRA -->
 
         <img class="after"
              src="images/after1.jpg">
-
-        <!-- SLIDER -->
 
         <div class="slider"></div>
 
@@ -226,8 +223,6 @@
 
         let dragging = false;
 
-        /* MOVIMENTO */
-
         function moveSlider(clientX){
 
             const rect = compare.getBoundingClientRect();
@@ -240,7 +235,7 @@
 
             const percent = (x / rect.width) * 100;
 
-            /* TAGLIO FOTO */
+            /* REVEAL FOTO */
 
             after.style.clipPath =
                 `inset(0 ${100 - percent}% 0 0)`;
@@ -289,37 +284,6 @@
         });
 
     });
-
-    /* AUTO RESIZE STORYMAPS */
-
-    function resizeStorymap(){
-
-        const height =
-            document.documentElement.scrollHeight;
-
-        window.parent.postMessage({
-
-            type:"resize",
-
-            height:height
-
-        }, "*");
-    }
-
-    window.addEventListener(
-        "load",
-        resizeStorymap
-    );
-
-    window.addEventListener(
-        "resize",
-        resizeStorymap
-    );
-
-    setTimeout(
-        resizeStorymap,
-        1000
-    );
 
 </script>
 
