@@ -51,7 +51,7 @@
             background:white;
         }
 
-        /* IMMAGINI */
+        /* LAYER */
 
         .before,
         .after{
@@ -65,9 +65,11 @@
             background-repeat:no-repeat;
         }
 
-        /* FOTO SOPRA */
+        /* AFTER */
 
         .after{
+
+            width:100%;
 
             clip-path:inset(0 50% 0 0);
         }
@@ -205,12 +207,12 @@
 
             const percent = (x / rect.width) * 100;
 
-            /* TAGLIO FOTO */
+            /* MASK */
 
             after.style.clipPath =
                 `inset(0 ${100-percent}% 0 0)`;
 
-            /* MUOVE SLIDER */
+            /* SLIDER */
 
             slider.style.left = percent + '%';
         }
