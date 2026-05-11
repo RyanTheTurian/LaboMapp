@@ -22,15 +22,16 @@
 
         /* PAGINA */
 
+        html,body{
+
+            width:100%;
+        }
+
         body{
 
-            background:#f8f8f8;
-
-            padding:10px;
+            background:transparent;
 
             font-family:Arial,sans-serif;
-
-            overflow:hidden;
         }
 
         /* CONTENITORE */
@@ -43,11 +44,9 @@
 
             width:100%;
 
-            justify-content:center;
-
-            align-items:flex-start;
-
             flex-wrap:wrap;
+
+            margin-bottom:10px;
         }
 
         /* SWIPE */
@@ -56,15 +55,15 @@
 
             position:relative;
 
-            width:48%;
+            flex:1;
+
+            min-width:300px;
 
             aspect-ratio:16/9;
 
             overflow:hidden;
 
             border-radius:15px;
-
-            background:white;
         }
 
         /* IMMAGINI */
@@ -78,9 +77,7 @@
             width:100%;
             height:100%;
 
-            object-fit:contain;
-
-            background:black;
+            object-fit:cover;
 
             pointer-events:none;
 
@@ -163,6 +160,8 @@
             .compare{
 
                 width:100%;
+
+                min-width:100%;
             }
 
             .slider::before{
@@ -290,6 +289,37 @@
         });
 
     });
+
+    /* AUTO RESIZE STORYMAPS */
+
+    function resizeStorymap(){
+
+        const height =
+            document.documentElement.scrollHeight;
+
+        window.parent.postMessage({
+
+            type:"resize",
+
+            height:height
+
+        }, "*");
+    }
+
+    window.addEventListener(
+        "load",
+        resizeStorymap
+    );
+
+    window.addEventListener(
+        "resize",
+        resizeStorymap
+    );
+
+    setTimeout(
+        resizeStorymap,
+        1000
+    );
 
 </script>
 
