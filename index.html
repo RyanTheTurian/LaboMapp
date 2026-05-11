@@ -22,12 +22,6 @@
 
         /* PAGINA */
 
-        html,body{
-
-            width:100%;
-            height:100%;
-        }
-
         body{
 
             background:#f8f8f8;
@@ -35,11 +29,9 @@
             padding:20px;
 
             font-family:Arial,sans-serif;
-
-            min-height:100vh;
         }
 
-        /* CONTENITORE */
+        /* CONTENITORE RIGHE */
 
         .container{
 
@@ -49,9 +41,13 @@
 
             width:100%;
 
+            justify-content:center;
+
+            align-items:flex-start;
+
             flex-wrap:wrap;
 
-            justify-content:center;
+            margin-bottom:15px;
         }
 
         /* BLOCCO SWIPE */
@@ -85,7 +81,8 @@
             object-fit:cover;
 
             pointer-events:none;
-            -webkit-user-drag::none;
+
+            -webkit-user-drag:none;
         }
 
         /* FOTO SOPRA */
@@ -118,8 +115,6 @@
             cursor:ew-resize;
 
             touch-action:none;
-            user-select::none;
-            -webkit-user-select:none;
         }
 
         /* CERCHIO */
@@ -167,8 +162,6 @@
 
                 flex-direction:column;
 
-                align-items:center;
-
                 gap:10px;
             }
 
@@ -176,15 +169,15 @@
 
                 width:100%;
 
-                aspect-ratio:16/7;
+                aspect-ratio:16/9;
             }
 
             .slider::before{
 
-                width:55px;
-                height:55px;
+                width:50px;
+                height:50px;
 
-                font-size:28px;
+                font-size:26px;
             }
         }
 
@@ -193,22 +186,18 @@
 
 <body>
 
+<!-- RIGA 1 -->
+
 <div class="container">
 
     <!-- SWIPE 1 -->
 
     <div class="compare">
 
-        <!-- FOTO SOTTO -->
-
         <img src="images/before1.jpg">
-
-        <!-- FOTO SOPRA -->
 
         <img class="after"
              src="images/after1.jpg">
-
-        <!-- SLIDER -->
 
         <div class="slider"></div>
 
@@ -229,6 +218,38 @@
 
 </div>
 
+<!-- RIGA 2 -->
+
+<div class="container">
+
+    <!-- SWIPE 3 -->
+
+    <div class="compare">
+
+        <img src="images/before3.jpg">
+
+        <img class="after"
+             src="images/after3.jpg">
+
+        <div class="slider"></div>
+
+    </div>
+
+    <!-- SWIPE 4 -->
+
+    <div class="compare">
+
+        <img src="images/before4.jpg">
+
+        <img class="after"
+             src="images/after4.jpg">
+
+        <div class="slider"></div>
+
+    </div>
+
+</div>
+
 <script>
 
     document.querySelectorAll('.compare').forEach(compare => {
@@ -239,15 +260,13 @@
 
         let dragging = false;
 
-        /* FUNZIONE MOVIMENTO */
+        /* MOVIMENTO */
 
         function moveSlider(clientX){
 
             const rect = compare.getBoundingClientRect();
 
             let x = clientX - rect.left;
-
-            /* LIMITI */
 
             if(x < 0) x = 0;
 
