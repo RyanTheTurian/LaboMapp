@@ -26,9 +26,11 @@
 
             background:#f8f8f8;
 
-            padding:20px;
+            padding:10px;
 
             font-family:Arial,sans-serif;
+
+            overflow:hidden;
         }
 
         /* CONTENITORE */
@@ -37,7 +39,7 @@
 
             display:flex;
 
-            gap:15px;
+            gap:10px;
 
             width:100%;
 
@@ -46,8 +48,6 @@
             align-items:flex-start;
 
             flex-wrap:wrap;
-
-            margin-bottom:15px;
         }
 
         /* SWIPE */
@@ -58,7 +58,7 @@
 
             width:48%;
 
-            height:clamp(220px, 32vw, 420px);
+            aspect-ratio:16/9;
 
             overflow:hidden;
 
@@ -78,7 +78,9 @@
             width:100%;
             height:100%;
 
-            object-fit:cover;
+            object-fit:contain;
+
+            background:black;
 
             pointer-events:none;
 
@@ -153,23 +155,14 @@
 
         @media (max-width:768px){
 
-            body{
-
-                padding:10px;
-            }
-
             .container{
 
                 flex-direction:column;
-
-                gap:10px;
             }
 
             .compare{
 
                 width:100%;
-
-                height:220px;
             }
 
             .slider::before{
@@ -234,6 +227,8 @@
 
         let dragging = false;
 
+        /* MOVIMENTO */
+
         function moveSlider(clientX){
 
             const rect = compare.getBoundingClientRect();
@@ -294,47 +289,6 @@
             moveSlider(e.touches[0].clientX);
         });
 
-    });
-
-    /* AUTO RESIZE STORYMAPS */
-
-    function sendHeight(){
-
-        const height =
-            document.body.scrollHeight;
-
-        if(window.parent){
-
-            window.parent.postMessage({
-
-                frameHeight:height
-
-            }, "*");
-        }
-    }
-
-    /* LOAD */
-
-    window.addEventListener(
-        "load",
-        sendHeight
-    );
-
-    /* RESIZE */
-
-    window.addEventListener(
-        "resize",
-        sendHeight
-    );
-
-    /* LOAD IMMAGINI */
-
-    document.querySelectorAll("img").forEach(img=>{
-
-        img.addEventListener(
-            "load",
-            sendHeight
-        );
     });
 
 </script>
