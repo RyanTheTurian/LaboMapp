@@ -23,7 +23,6 @@
         /* PAGINA */
 
         body{
-
             font-family:Arial,sans-serif;
 
             background:#f8f8f8;
@@ -46,7 +45,7 @@
             flex-wrap:wrap;
         }
 
-        /* BLOCCO */
+        /* BLOCCO COMPARAZIONE */
 
         .compare{
 
@@ -63,7 +62,7 @@
             background:white;
         }
 
-        /* IMMAGINI */
+        /* IMMAGINI BASE */
 
         .compare img{
 
@@ -80,7 +79,7 @@
             pointer-events:none;
         }
 
-        /* FOTO SOPRA */
+        /* CONTENITORE FOTO AFTER */
 
         .after{
 
@@ -93,6 +92,23 @@
             height:100%;
 
             overflow:hidden;
+        }
+
+        /* FOTO AFTER */
+
+        .after img{
+
+            position:absolute;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            object-fit:cover;
+
+            min-width:100%;
         }
 
         /* SLIDER */
@@ -116,7 +132,7 @@
             touch-action:none;
         }
 
-        /* CERCHIO */
+        /* CERCHIO CENTRALE */
 
         .slider::before{
 
@@ -174,21 +190,27 @@
 
 <div class="container">
 
-    <!-- BLOCCO 1 -->
+    <!-- CONFRONTO 1 -->
 
     <div class="compare">
 
+        <!-- FOTO BEFORE -->
+
         <img src="images/before1.jpg">
+
+        <!-- FOTO AFTER -->
 
         <div class="after">
             <img src="images/after1.jpg">
         </div>
 
+        <!-- SLIDER -->
+
         <div class="slider"></div>
 
     </div>
 
-    <!-- BLOCCO 2 -->
+    <!-- CONFRONTO 2 -->
 
     <div class="compare">
 
@@ -206,6 +228,8 @@
 
 <script>
 
+    /* PER OGNI BLOCCO */
+
     document.querySelectorAll('.compare').forEach(compare => {
 
         const slider = compare.querySelector('.slider');
@@ -213,16 +237,24 @@
 
         let dragging = false;
 
+        /* FUNZIONE MOVIMENTO */
+
         function moveSlider(clientX){
 
             const rect = compare.getBoundingClientRect();
 
             let x = clientX - rect.left;
 
+            /* LIMITI */
+
             if(x < 0) x = 0;
             if(x > rect.width) x = rect.width;
 
+            /* REVEAL FOTO */
+
             after.style.width = x + 'px';
+
+            /* MUOVE SLIDER */
 
             slider.style.left = x + 'px';
         }
