@@ -22,14 +22,14 @@
 
         /* PAGINA */
 
-       body{
+        body{
 
-         font-family:Arial,sans-serif;
+            font-family:Arial,sans-serif;
 
-        background:#f8f8f8;
+            background:#f8f8f8;
 
-        padding:20px;
-       }
+            padding:20px;
+        }
 
         /* CONTENITORE */
 
@@ -37,20 +37,24 @@
 
             display:flex;
 
-            gap:10px;
+            gap:15px;
 
-            width:95%;
-            height:80vh;
+            width:100%;
+
+            justify-content:center;
+
+            flex-wrap:wrap;
         }
 
-        /* BLOCCO COMPARAZIONE */
+        /* BLOCCO */
 
         .compare{
 
             position:relative;
 
-            width:50%;
-            height:100%;
+            width:48%;
+
+            height:70vh;
 
             overflow:hidden;
 
@@ -76,7 +80,7 @@
             pointer-events:none;
         }
 
-        /* IMMAGINE SOPRA */
+        /* FOTO SOPRA */
 
         .after{
 
@@ -108,6 +112,8 @@
             z-index:10;
 
             cursor:ew-resize;
+
+            touch-action:none;
         }
 
         /* CERCHIO */
@@ -123,8 +129,8 @@
 
             transform:translate(-50%,-50%);
 
-            width:40px;
-            height:40px;
+            width:45px;
+            height:45px;
 
             background:white;
 
@@ -134,39 +140,32 @@
             justify-content:center;
             align-items:center;
 
-            font-size:20px;
+            font-size:22px;
             font-weight:bold;
 
             color:black;
+
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
         }
-        .container{
 
-    display:flex;
+        /* MOBILE */
 
-    gap:10px;
+        @media (max-width: 768px){
 
-    width:100%;
+            .container{
 
-    height:80vh;
+                flex-direction:column;
 
-    margin-bottom:20px;
-}
-      @media (max-width: 768px){
+                align-items:center;
+            }
 
-    .container{
-        flex-direction:column;
-        height:auto;
-    }
+            .compare{
 
-    .compare-wrapper{
-        width:100%;
-    }
+                width:100%;
 
-    .compare{
-        height:40vh;
-    }
-
-}
+                height:45vh;
+            }
+        }
 
     </style>
 </head>
@@ -175,27 +174,21 @@
 
 <div class="container">
 
-    <!-- COMPARAZIONE 1 -->
+    <!-- BLOCCO 1 -->
 
     <div class="compare">
 
-        <!-- FOTO SOTTO -->
-
         <img src="images/before1.jpg">
-
-        <!-- FOTO SOPRA -->
 
         <div class="after">
             <img src="images/after1.jpg">
         </div>
 
-        <!-- SLIDER -->
-
         <div class="slider"></div>
 
     </div>
 
-    <!-- COMPARAZIONE 2 -->
+    <!-- BLOCCO 2 -->
 
     <div class="compare">
 
@@ -213,8 +206,6 @@
 
 <script>
 
-    /* PER OGNI COMPARAZIONE */
-
     document.querySelectorAll('.compare').forEach(compare => {
 
         const slider = compare.querySelector('.slider');
@@ -222,40 +213,52 @@
 
         let dragging = false;
 
-        /* CLICK */
+        function moveSlider(clientX){
+
+            const rect = compare.getBoundingClientRect();
+
+            let x = clientX - rect.left;
+
+            if(x < 0) x = 0;
+            if(x > rect.width) x = rect.width;
+
+            after.style.width = x + 'px';
+
+            slider.style.left = x + 'px';
+        }
+
+        /* DESKTOP */
 
         slider.addEventListener('mousedown', () => {
             dragging = true;
         });
 
-        /* RILASCIO */
-
         window.addEventListener('mouseup', () => {
             dragging = false;
         });
-
-        /* MOVIMENTO */
 
         window.addEventListener('mousemove', e => {
 
             if(!dragging) return;
 
-            const rect = compare.getBoundingClientRect();
+            moveSlider(e.clientX);
+        });
 
-            let x = e.clientX - rect.left;
+        /* MOBILE */
 
-            /* LIMITI */
+        slider.addEventListener('touchstart', () => {
+            dragging = true;
+        });
 
-            if(x < 0) x = 0;
-            if(x > rect.width) x = rect.width;
+        window.addEventListener('touchend', () => {
+            dragging = false;
+        });
 
-            /* MUOVE IMMAGINE */
+        window.addEventListener('touchmove', e => {
 
-            after.style.width = x + 'px';
+            if(!dragging) return;
 
-            /* MUOVE SLIDER */
-
-            slider.style.left = x + 'px';
+            moveSlider(e.touches[0].clientX);
         });
 
     });
