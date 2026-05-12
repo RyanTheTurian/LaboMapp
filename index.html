@@ -33,7 +33,7 @@
             font-family:Arial,sans-serif;
         }
 
-        /* RIGA */
+        /* CONTENITORE RIGA */
 
         .container{
 
@@ -69,7 +69,7 @@
 
             width:100%;
 
-            height:min(32vw, 340px);
+            height:min(26vw, 260px);
 
             overflow:hidden;
 
@@ -96,7 +96,7 @@
             -webkit-user-drag:none;
         }
 
-        /* FOTO SOPRA */
+        /* IMMAGINE SOPRA */
 
         .after{
 
@@ -141,8 +141,8 @@
 
             transform:translate(-50%,-50%);
 
-            width:45px;
-            height:45px;
+            width:44px;
+            height:44px;
 
             border-radius:50%;
 
@@ -166,11 +166,15 @@
 
             margin-top:12px;
 
+            text-align:center;
+
             font-size:15px;
 
             line-height:1.5;
 
             color:#222;
+
+            padding:0 10px;
         }
 
         /* MOBILE */
@@ -186,15 +190,15 @@
 
             .compare{
 
-                height:220px;
+                height:180px;
             }
 
             .slider::before{
 
-                width:50px;
-                height:50px;
+                width:48px;
+                height:48px;
 
-                font-size:26px;
+                font-size:24px;
             }
 
             .caption{
@@ -208,9 +212,11 @@
 
 <body>
 
+<!-- RIGA -->
+
 <div class="container">
 
-    <!-- COLONNA 1 -->
+    <!-- SLIDE 1 -->
 
     <div class="column">
 
@@ -241,7 +247,7 @@
 
     </div>
 
-    <!-- COLONNA 2 -->
+    <!-- SLIDE 2 -->
 
     <div class="column">
 
@@ -290,7 +296,7 @@
 
             const percent = (x / rect.width) * 100;
 
-            /* REVEAL FOTO */
+            /* TAGLIO FOTO */
 
             after.style.clipPath =
                 `inset(0 ${100 - percent}% 0 0)`;
