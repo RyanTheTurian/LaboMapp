@@ -205,35 +205,48 @@
     }
 }
 
-/* MOBILE ORIZZONTALE */
+/* MOBILE */
 
-@media (max-width:950px) and (orientation:landscape){
+@media (max-width:850px){
 
     .container{
 
-        grid-template-columns:1fr 1fr !important;
+        grid-template-columns:1fr;
     }
 
     .compare{
 
-        height:180px;
+        height:260px;
     }
 
     .caption{
 
-        font-size:14px;
+        font-size:16px;
+    }
+
+    .slider::before{
+
+        width:54px;
+        height:54px;
+
+        font-size:26px;
     }
 }
 
-        /* DESKTOP GRANDE */
+/* TABLET + TELEFONI ORIZZONTALI */
 
-        @media (min-width:1400px){
+@media (min-width:851px){
 
-            .compare{
+    .container{
 
-                height:360px;
-            }
-        }
+        grid-template-columns:1fr 1fr;
+    }
+
+    .compare{
+
+        height:220px;
+    }
+}
 
     </style>
 </head>
