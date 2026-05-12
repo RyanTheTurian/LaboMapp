@@ -43,9 +43,9 @@
 
             width:100%;
 
-            align-items:stretch;
+            align-items:flex-start;
 
-            margin-bottom:20px;
+            margin-bottom:24px;
         }
 
         /* COLONNA */
@@ -57,6 +57,8 @@
             display:flex;
 
             flex-direction:column;
+
+            min-width:0;
         }
 
         /* SWIPE */
@@ -65,9 +67,13 @@
 
             position:relative;
 
+            flex:1 1 0;
+
+            min-width:0;
+
             width:100%;
 
-            aspect-ratio:16/9;
+            height:min(32vw, 340px);
 
             overflow:hidden;
 
@@ -162,11 +168,11 @@
 
         .caption{
 
-            margin-top:10px;
+            margin-top:12px;
 
             font-size:15px;
 
-            line-height:1.4;
+            line-height:1.5;
 
             color:#222;
         }
@@ -174,10 +180,6 @@
         /* MOBILE */
 
         @media (max-width:768px){
-
-            body{
-                padding:0;
-            }
 
             .container{
 
@@ -188,7 +190,7 @@
 
             .compare{
 
-                aspect-ratio:4/3;
+                height:220px;
             }
 
             .slider::before{
@@ -231,9 +233,9 @@
 
         <div class="caption">
 
-            Questa è la didascalia dello slide 1.
-            Può occupare anche più righe senza
-            spostare male gli altri elementi.
+            Didascalia dello slide 1.
+            Può occupare più righe senza
+            rompere l’allineamento.
 
         </div>
 
@@ -385,6 +387,32 @@
         });
 
     });
+
+    /* AUTO HEIGHT STORYMAPS */
+
+    function updateHeight(){
+
+        const h =
+            document.body.scrollHeight;
+
+        window.parent.postMessage({
+
+            frameHeight:h
+
+        }, "*");
+    }
+
+    window.addEventListener(
+        "load",
+        updateHeight
+    );
+
+    window.addEventListener(
+        "resize",
+        updateHeight
+    );
+
+    setTimeout(updateHeight,500);
 
 </script>
 
