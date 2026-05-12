@@ -33,19 +33,32 @@
             font-family:Arial,sans-serif;
         }
 
-        /* CONTENITORE */
+        /* RIGA */
 
         .container{
 
             display:flex;
 
-            gap:10px;
+            gap:16px;
 
             width:100%;
 
-            flex-wrap:wrap;
+            align-items:flex-start;
 
-            margin-bottom:10px;
+            margin-bottom:24px;
+        }
+
+        /* COLONNA */
+
+        .column{
+
+            flex:1;
+
+            display:flex;
+
+            flex-direction:column;
+
+            min-width:0;
         }
 
         /* SWIPE */
@@ -54,11 +67,9 @@
 
             position:relative;
 
-            flex:1;
+            width:100%;
 
-            min-width:300px;
-
-            aspect-ratio:16/9;
+            height:min(32vw, 340px);
 
             overflow:hidden;
 
@@ -149,6 +160,19 @@
             box-shadow:0 0 10px rgba(0,0,0,0.25);
         }
 
+        /* DIDASCALIA */
+
+        .caption{
+
+            margin-top:12px;
+
+            font-size:15px;
+
+            line-height:1.5;
+
+            color:#222;
+        }
+
         /* MOBILE */
 
         @media (max-width:768px){
@@ -156,13 +180,13 @@
             .container{
 
                 flex-direction:column;
+
+                gap:24px;
             }
 
             .compare{
 
-                width:100%;
-
-                min-width:100%;
+                height:220px;
             }
 
             .slider::before{
@@ -172,6 +196,11 @@
 
                 font-size:26px;
             }
+
+            .caption{
+
+                font-size:16px;
+            }
         }
 
     </style>
@@ -179,33 +208,59 @@
 
 <body>
 
-<!-- RIGA -->
-
 <div class="container">
 
-    <!-- SWIPE 1 -->
+    <!-- COLONNA 1 -->
 
-    <div class="compare">
+    <div class="column">
 
-        <img src="images/before1.jpg">
+        <div class="compare">
 
-        <img class="after"
-             src="images/after1.jpg">
+            <!-- FOTO SOTTO -->
 
-        <div class="slider"></div>
+            <img src="images/before1.jpg">
+
+            <!-- FOTO SOPRA -->
+
+            <img class="after"
+                 src="images/after1.jpg">
+
+            <!-- SLIDER -->
+
+            <div class="slider"></div>
+
+        </div>
+
+        <!-- DIDASCALIA -->
+
+        <div class="caption">
+
+            Inserisci qui la didascalia dello slide 1.
+
+        </div>
 
     </div>
 
-    <!-- SWIPE 2 -->
+    <!-- COLONNA 2 -->
 
-    <div class="compare">
+    <div class="column">
 
-        <img src="images/before2.jpg">
+        <div class="compare">
 
-        <img class="after"
-             src="images/after2.jpg">
+            <img src="images/before2.jpg">
 
-        <div class="slider"></div>
+            <img class="after"
+                 src="images/after2.jpg">
+
+            <div class="slider"></div>
+
+        </div>
+
+        <div class="caption">
+
+            Inserisci qui la didascalia dello slide 2.
+
+        </div>
 
     </div>
 
