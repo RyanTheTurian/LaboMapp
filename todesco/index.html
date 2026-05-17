@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+
+    /* reset */
+    html, body{
+        margin:0;
+        padding:0;
+        overflow:hidden;
+        font-family: Arial, sans-serif;
+        background:transparent;
+    }
+
+    /* contenitore principale */
+    .story-panel{
+
+        /* IMPORTANTISSIMO:
+           lascia spazio al popup Sidecar a sinistra */
+        margin-left: 320px;
+
+        /* pannello a destra */
+        width: calc(100vw - 340px);
+
+        height: 100vh;
+
+        display:flex;
+        justify-content:flex-end;
+        align-items:flex-start;
+
+        box-sizing:border-box;
+
+        padding:40px;
+    }
+
+    /* box testo */
+    .text-box{
+
+        width:100%;
+        max-width:600px;
+
+        background:rgba(255,255,255,0.96);
+
+        backdrop-filter: blur(6px);
+
+        border-radius:18px;
+
+        padding:32px;
+
+        box-shadow:
+            0 4px 25px rgba(0,0,0,0.15);
+
+        overflow-y:auto;
+
+        max-height:85vh;
+
+        box-sizing:border-box;
+    }
+
+    /* titolo */
+    .text-box h1{
+        margin-top:0;
+        font-size:2rem;
+        line-height:1.2;
+    }
+
+    /* testo */
+    .text-box p{
+        font-size:1rem;
+        line-height:1.7;
+        color:#333;
+    }
+
+    /* responsive tablet */
+    @media (max-width: 1000px){
+
+        .story-panel{
+            margin-left:260px;
+            width:calc(100vw - 280px);
+            padding:24px;
+        }
+
+    }
+
+    /* responsive mobile */
+    @media (max-width: 768px){
+
+        .story-panel{
+
+            margin-left:0;
+
+            width:100vw;
+
+            justify-content:center;
+
+            padding:16px;
+
+            align-items:flex-end;
+        }
+
+        .text-box{
+
+            max-width:none;
+
+            width:100%;
+
+            max-height:70vh;
+
+            border-radius:20px 20px 0 0;
+
+            padding:24px;
+        }
+
+        .text-box h1{
+            font-size:1.5rem;
+        }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="story-panel">
+
+  <div class="text-box">
+
+    <h1>Lager 6001 di Hildesheim</h1>
+
+    <p>
+      Luigi Todesco trascorse la prigionia nel Lager 6001
+      di Hildesheim, in Germania, dopo essere stato catturato
+      durante la Seconda guerra mondiale.
+    </p>
+
+    <p>
+      Le condizioni dei campi per gli Internati Militari Italiani
+      erano estremamente dure: lavoro forzato, scarsità di cibo
+      e isolamento caratterizzavano la vita quotidiana.
+    </p>
+
+    <p>
+      Questo periodo segnò profondamente la sua esperienza umana
+      e personale durante il conflitto.
+    </p>
+
+  </div>
+
+</div>
+
+</body>
+</html>
